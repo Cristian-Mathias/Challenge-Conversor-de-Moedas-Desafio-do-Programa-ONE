@@ -1,36 +1,51 @@
 package br.com.cristianmathias.conversordemoedas;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         try {
             String apiKey = System.getenv("API_KEY");
-            String url_str = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/USD";
+            if (apiKey == null || apiKey.isEmpty()) {
+                System.out.println("Variável de ambiente API_KEY não encontrada!");
+                return;
+            }
 
-            URL url = new URL(url_str);
-            HttpURLConnection request = (HttpURLConnection) url.openConnection();
-            request.setRequestMethod("GET");
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Moeda de origem (ex: USD): ");
+            String moedaOrigem = sc.next().toUpperCase();
+            System.out.print("Moeda de destino (ex: BRL): ");
+            String moedaDestino = sc.next().toUpperCase();
+            System.out.print("Valor a converter: ");
+            double valor = sc.nextDouble();
 
-            InputStream inputStream = request.getInputStream();
-            JsonParser jp = new JsonParser();
-            JsonElement root = jp.parse(new InputStreamReader(inputStream));
-            JsonObject jsonobj = root.getAsJsonObject();
+            String urlStr = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/"
+                    + moedaOrigem + "/" + moedaDestino;
 
-            String req_result = jsonobj.get("result").getAsString();
-            System.out.println("Resultado da requisição: " + req_result);
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(urlStr))
+                    .GET()
+                    .build();
 
-            double taxaUsdToBrl = jsonobj.getAsJsonObject("conversion_rates").get("BRL").getAsDouble();
-            System.out.println("Taxa USD → BRL: " + taxaUsdToBrl);
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        } catch (Exception e) {
+            JsonObject jsonObj = JsonParser.parseString(response.body()).getAsJsonObject();
+            double taxa = jsonObj.get("conversion_rate").getAsDouble();
+            double valorConvertido = valor * taxa;
+
+            System.out.printf("Taxa %s → %s: %.4f%n", moedaOrigem, moedaDestino, taxa);
+            System.out.printf("Valor convertido: %.2f %s%n", valorConvertido, moedaDestino);
+
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
