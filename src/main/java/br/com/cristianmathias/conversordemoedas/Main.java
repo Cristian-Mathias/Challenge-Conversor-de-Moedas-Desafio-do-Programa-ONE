@@ -1,9 +1,12 @@
 package br.com.cristianmathias.conversordemoedas;
 
+import br.com.cristianmathias.conversordemoedas.model.Conversion;
 import br.com.cristianmathias.conversordemoedas.model.CurrencyConverter;
 import br.com.cristianmathias.conversordemoedas.sevice.ExchangeRateService;
 import br.com.cristianmathias.conversordemoedas.ui.UserInterface;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -21,6 +24,8 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         int option;
+
+        List<Conversion> history = new ArrayList<>();
 
         do {
             System.out.println("\n=== Conversor de Moedas ===");
@@ -45,7 +50,6 @@ public class Main {
                 double amount = 0;
                 boolean validInput = false;
 
-                // loop para garantir entrada válida do valor
                 while (!validInput) {
                     System.out.print("Digite o valor a converter: ");
                     String input = scanner.next().replace(",", ".");
@@ -74,10 +78,23 @@ public class Main {
                     double convertedValue = converter.convert(fromCurrency, toCurrency, amount);
                     double rate = rateService.getExchangeRate(fromCurrency, toCurrency);
                     ui.showResult(fromCurrency, toCurrency, rate, convertedValue);
+
+                    String timestamp = java.time.LocalDateTime.now().toString();
+                    history.add(new Conversion(fromCurrency, toCurrency, amount, convertedValue, timestamp));
+                    System.out.println("Histórico: " + history.get(history.size() - 1));
+
                 } catch (IOException | InterruptedException e) {
                     System.out.println("Erro ao consultar a API.");
                     e.printStackTrace();
                 }
+            } else if (option == 7) {
+                System.out.println("\n=== Histórico de Conversões ===");
+                if (history.isEmpty()) {
+                    System.out.println("Nenhuma conversão realizada ainda.");
+                } else {
+                    history.forEach(System.out::println);
+                }
+
             } else if (option != 7) {
                 System.out.println("Opção inválida!");
             }
