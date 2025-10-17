@@ -31,8 +31,8 @@ O desafio proporciona uma experiência prática e completa, simulando um cenári
   <img src="https://img.shields.io/badge/Java-17+-orange?style=for-the-badge&logo=java&logoColor=white" alt="Java 17+">
   <img src="https://img.shields.io/badge/Gson-2.10.1-blue?style=for-the-badge" alt="Gson 2.10.1">
   <img src="https://img.shields.io/badge/ExchangeRate--API-lightgrey?style=for-the-badge" alt="ExchangeRate-API">
-  <img src="https://img.shields.io/badge/IntelliJ%20IDEA-2023.2-purple?style=for-the-badge&logo=IntelliJ IDEA&logoColor=white" alt="IntelliJ IDEA">
-  <img src="https://img.shields.io/badge/Maven-3.9.0-red?style=for-the-badge&logo=Apache Maven&logoColor=white" alt="Maven">
+  <img src="https://img.shields.io/badge/IntelliJ%20IDEA-2023.2-purple?style=for-the-badge&logo=intellij-idea&logoColor=white" alt="IntelliJ IDEA">
+  <img src="https://img.shields.io/badge/Maven-3.9.0-red?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven">
 </p>
 
 ---
