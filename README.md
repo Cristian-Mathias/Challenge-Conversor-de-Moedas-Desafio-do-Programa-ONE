@@ -36,12 +36,24 @@ O desafio proporciona uma experiência prática e completa, simulando um cenári
 </p>
 
 ---
-### Funcionalidades e Demonstração
+### Funcionalidades 
 
 - Consulta de taxas de câmbio em tempo real
 - Conversão entre múltiplas moedas
 - Menu interativo no console
 
-#### Demonstração
+1. Histórico de Conversões
 
-![Demonstração do Conversor](./assets/demo.gif)
+- Cada conversão realizada é registrada em memória durante a execução do programa.
+- Permite que o usuário visualize todas as conversões feitas antes de encerrar o programa.
+- Benefício: facilita a revisão rápida das conversões realizadas sem consultar a API novamente.
+
+2. Registro de Logs em Arquivo
+
+- Toda conversão é automaticamente registrada em um arquivo .txt (logs_conversoes.txt).
+- Cada entrada contém:
+  - Data e hora da conversão
+  - Moeda de origem e destino
+  - Valor original e valor convertido
+
+- Benefício: mantém um histórico persistente, mesmo após o encerramento do programa, útil para auditoria ou análise posterior.

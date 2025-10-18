@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class LogService {
-    private static final String LOG_FILE = "logs_conversões.txt";
+    private static final String LOG_FILE = "logs_conversoes.txt";
 
     public static void  registerConversion(Conversion conversion){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE, true))){
