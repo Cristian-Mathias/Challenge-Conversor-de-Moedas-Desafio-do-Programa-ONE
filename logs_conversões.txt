@@ -1,0 +1,16 @@
+
+{ 
+ Moeda de origem= 'USD',
+ Moeda de destino= 'BRL',
+ Valor original= 200.0',
+ Valor convertido= '1088.92',
+ Data e hora= '18/10/2025 10:41:55'
+}
+
+{ 
+ Moeda de origem= 'BRL',
+ Moeda de destino= 'USD',
+ Valor original= 1088.92',
+ Valor convertido= '200.034604',
+ Data e hora= '18/10/2025 10:44:13'
+}

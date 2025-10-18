@@ -3,6 +3,7 @@ package br.com.cristianmathias.conversordemoedas;
 import br.com.cristianmathias.conversordemoedas.model.Conversion;
 import br.com.cristianmathias.conversordemoedas.model.CurrencyConverter;
 import br.com.cristianmathias.conversordemoedas.sevice.ExchangeRateService;
+import br.com.cristianmathias.conversordemoedas.sevice.LogService;
 import br.com.cristianmathias.conversordemoedas.ui.UserInterface;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,7 +81,11 @@ public class Main {
                     ui.showResult(fromCurrency, toCurrency, rate, convertedValue);
 
                     String timestamp = java.time.LocalDateTime.now().toString();
-                    history.add(new Conversion(fromCurrency, toCurrency, amount, convertedValue, timestamp));
+                    Conversion conversion = new Conversion(fromCurrency, toCurrency, amount, convertedValue, timestamp);
+                    history.add(conversion);
+
+                    LogService.registerConversion(conversion);
+
                     System.out.println("Histórico: " + history.get(history.size() - 1));
 
                 } catch (IOException | InterruptedException e) {
