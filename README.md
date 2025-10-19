@@ -57,3 +57,28 @@ O desafio proporciona uma experiência prática e completa, simulando um cenári
   - Valor original e valor convertido
 
 - Benefício: mantém um histórico persistente, mesmo após o encerramento do programa, útil para auditoria ou análise posterior.
+
+---
+### Configuração da Chave da API
+
+Este projeto utiliza a **ExchangeRate-API** para realizar as conversões de moedas.
+Para funcionar corretamente, é necessário configurar uma **variável de ambiente** contendo sua chave de acesso.
+
+1. Obtenha uma chave de API
+- Acesse o site **https://www.exchangerate-api.com/** e crie uma conta gratuita para gerar sua API Key.
+
+2. Configurar variável de ambiente no IntelliJ IDEA
+- Passo a passo:
+  - Abra o IntelliJ IDEA.
+  - Vá até o menu superior e clique em:
+    ````bach
+    Run → Edit Configurations...
+    ````
+  - Selecione sua configuração de execução (por exemplo, Main).
+  - Na seção Environment variables, clique no ícone de +.
+  - Adicione a variável:
+    ````bach
+    API_KEY=sua_chave_aqui
+    ````
+  - Clique em OK para salvar.
+  - Execute novamente o projeto.
